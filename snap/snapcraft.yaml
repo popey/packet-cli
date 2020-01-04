@@ -1,0 +1,25 @@
+name: packet
+base: core18 # the base snap is the execution environment for this snap
+version: git
+summary: Official Packet CLI
+description: |
+  Packet provides an API-driven bare metal platform that combines the automation experience of the cloud with the benefits of physical, bare metal servers.
+  The Packet CLI wraps the Packet Go SDK allowing interaction with Packet platform from a command-line interface.
+
+grade: stable
+confinement: strict
+
+parts:
+  packet:
+    plugin: go
+    source: .
+    go-importpath: github.com/packethost/packet-cli
+    go-channel: 1.13/stable
+    build-packages:
+      - gcc
+
+apps:
+  packet:
+    command: packet
+    plugs:
+      - network
